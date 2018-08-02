@@ -1,5 +1,7 @@
 package game;
 
+import org.omg.CORBA.DynAnyPackage.Invalid;
+
 import java.util.Random;
 
 /**
@@ -168,12 +170,19 @@ public class Game
 
     public static void main(String[] args)
     {
-        Team t = new Team("Lakers");
-        Team o = new Team("Warriors");
-        Game g = new Game(25);
-        g.setPlayerOne(t.getPlayerName());
-        g.setPlayerTwo(o.getPlayerName());
-        g.playGame();
-        System.out.println(g.winner());
+        try {
+            Team team1 = new Team("Rockets");
+            Team team2 = new Team("Warriors");
+            Game game = new Game(25);
+            game.setPlayerOne(team1.getPlayerName());
+            game.setPlayerTwo(team2.getPlayerName());
+            game.playGame();
+            System.out.println(game.winner());
+        }
+        catch (InvalidTeamException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

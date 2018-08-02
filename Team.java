@@ -21,17 +21,24 @@ public class Team
             "Jeff Teague", "Jrue Holiday", "Emmanuel Mudiay", "Russell Westbrook", "D.J. Augustin", "Ben Simmons", "Brandon Knight", "Damian Lillard", "De'Aaron Fox",
             "Patty Mills", "Kyle Lowry", "Ricky Rubio", "John Wall"};
 
-    public Team(String name)
+    public Team(String name) throws InvalidTeamException
     {
+        String nameToCheck = "";
         teamName = name;
-        for(int i = 0; i < teams.length; i++)
+        for (int i = 0; i < teams.length; i++)
         {
-            if(teamName.equals(teams[i]))
+            nameToCheck = teams[i];
+            if (teamName.equals(teams[i]))
             {
                 teamID = i;
                 break;
             }
         }
+        if(!name.equals(nameToCheck))
+        {
+            throw new InvalidTeamException("Invalid NBA team entered, please enter a valid NBA team.");
+        }
+
     }
 
     public String getPlayerName()
@@ -42,14 +49,6 @@ public class Team
     public String getTeamName()
     {
         return teamName;
-    }
-
-    public static void main(String[] args)
-    {
-        Team t = new Team("Lakers");
-        System.out.println(t.getPlayerName());
-        Random d = new Random();
-        System.out.println(d.nextInt(2) + 2);
     }
 
 }
